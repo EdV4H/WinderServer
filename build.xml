@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Winder" basedir="." default="jar">
+
+    <property name="src" location="src" />
+    <property name="bin" location="bin" />
+
+    <property name="target-jar" value="WinderServer.jar" />
+
+	<target name="init">
+        <mkdir dir="${bin}" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src}" destdir="${bin}" encoding="UTF-8" includeAntRuntime="false" />
+        <copy todir="${bin}">
+			<fileset dir="${src}" includes="**/*" excludes="**/*.java" />
+		</copy>
+    </target>
+
+    <target name="jar" depends="compile" description="create jar">
+        <jar destfile="${target-jar}" basedir="${bin}" compress="false" update="false">
+            <manifest>
+                <attribute name="Main-Class" value="WinderServer.main.MainFrame" />
+            </manifest>
+            <fileset dir="." includes="img/**/*,layout/*.fxml, dat/*.dat" />
+        </jar>
+    </target>
+
+</project>
